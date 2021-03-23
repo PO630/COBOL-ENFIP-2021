@@ -60,10 +60,6 @@
                10 F-CODE-REGION            PIC X(2).
                10 FILLER                   PIC X(9).
 
-      *     05 F-Taux.
-      *         10 F-Taux-Carbone        PIC X(9).
-      *         10 F-Taux-Densite        PIC X(9).
-
        FD  C-COMMUNES.
        01  C-COMMUNES-ENREG.
 
@@ -77,13 +73,14 @@
                10 C-Region              PIC X(30).
 
            05 C-Donnees.
-               10 C-Altitude            PIC 9(6)V99 .
-               10 C-Superficie          PIC 9(6)V99 .
-               10 C-Population          PIC 9(6)V99 .
+               10 C-Altitude            PIC 9(6)V99.
+               10 C-Superficie          PIC 9(6)V99.
+               10 C-Population          PIC 9(6)V99.
 
            05 C-Taux.
-               10 C-Taux-Carbone        PIC 9(4)V99 .
-               10 C-Taux-Densite        PIC 9(4)V99 .
+               10 C-Taux-Carbone        PIC 9(4)V99.
+               10 C-Taux-Densite        PIC 9(4)V99.
+
 
       ******************************************************************
        WORKING-STORAGE SECTION.
@@ -91,8 +88,6 @@
        1   WORKING-DATA-MANAGER.
 
            05 CODE-INSEE-REG-CORSE     PIC 9(2) VALUE 20.
-
-
 
        1   FILE-WORKING-MANAGER.
       * ++===                                fin article rencontre ===++
@@ -117,8 +112,6 @@
                    SET FF TO TRUE
                 NOT AT END
 
-                   DISPLAY F-COMMUNES-ENREG
-
       *            Ajout du code Insee
                    IF F-CODE-DEPT-CORSE THEN
                        MOVE CODE-INSEE-REG-CORSE   TO C-CODE-INSEE-REG
@@ -131,12 +124,16 @@
                    MOVE F-Lieu TO C-Lieu
 
       *            Ajout des données
+                   MOVE F-Altitude TO C-Altitude
+                   MOVE F-Superficie TO C-Superficie
+                   MOVE F-Population TO C-Population
 
+      *            Taux initialisation a 0
+                   MOVE 0 TO C-Taux-Carbone
+                   MOVE 0 TO C-Taux-Densite
 
       *            Ecriture dans le fichier
                    WRITE C-COMMUNES-ENREG
-
-
 
               END-READ
            END-PERFORM
