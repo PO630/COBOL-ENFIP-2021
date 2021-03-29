@@ -8,7 +8,8 @@
                    ORGANIZATION LINE SEQUENTIAL.
 
            SELECT FS ASSIGN TO "5-communes.idx"
-                   ORGANIZATION INDEXED ACCESS SEQUENTIAL
+                   ORGANIZATION IS INDEXED
+                   ACCESS MODE IS RANDOM
                    RECORD KEY C-Code-Insee.
 
        DATA DIVISION.
@@ -61,16 +62,19 @@
                    AT END
                        SET FF TO TRUE
                    NOT AT END
-                       MOVE E-Lieu TO C-Lieu
-                       MOVE E-Donnees TO C-Donnees
-                       Move E-Taux TO C-Taux
-                       WRITE C-Code-Insee FROM E-Code-Insee
+
+                   MOVE E-Code-Insee TO C-Code-Insee
+                   MOVE E-Lieu TO C-Lieu
+                   MOVE E-Donnees TO C-Donnees
+                   MOVE E-Taux TO C-Taux
+
+                   WRITE FS-DATA
                            INVALID KEY
-                           DISPLAY "Problème d'écriture de clé"
-                       END-WRITE
-                       WRITE C-Lieu
-                       WRITE C-Donnees
-                       WRITE C-Taux
+                                     DISPLAY "Key error"
+                           NOT INVALID KEY
+                                     CONTINUE
+                   END-WRITE
+
                END-READ
            END-PERFORM
 

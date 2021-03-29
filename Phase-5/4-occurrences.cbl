@@ -18,7 +18,8 @@
            SELECT  C-OCCURRENCES ASSIGN TO "5-occurrences.idx"
                ORGANIZATION IS INDEXED
                ACCESS MODE IS RANDOM
-               RECORD KEY IS C-PRIMARY-KEY.
+               RECORD KEY IS C-PRIMARY-KEY
+               ALTERNATE RECORD KEY C-NUMERO-FISCAL WITH DUPLICATES.
 
       ******************************************************************
        DATA DIVISION.
