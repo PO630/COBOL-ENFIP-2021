@@ -73,13 +73,16 @@
 
 
                    MOVE NEW-PRIMARY-KEY TO C-PRIMARY-KEY
+
+                   MOVE F-NUMERO-FISCAL TO C-NUMERO-FISCAL
+                   
                    MOVE F-VALUE TO C-VALUE
 
                    WRITE C-OCCURRENCES-ENREG
                        INVALID KEY
                            DISPLAY NEW-PRIMARY-KEY" IS USED"
                        NOT INVALID KEY
-                           DISPLAY C-OCCURRENCES-ENREG
+                           CONTINUE
                    END-WRITE
 
                    ADD 1 TO NEW-PRIMARY-KEY

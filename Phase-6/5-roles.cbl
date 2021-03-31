@@ -263,6 +263,8 @@
                quotient taxe-Commune taxe-Dept taxe-Region taxe
                Revenu
       *    resultat init
+           INITIALIZE I-Identite E-Identite
+           INITIALIZE I-Lieu E-Lieu
            INITIALIZE I-Imposition E-Imposition
            .
 
@@ -278,7 +280,7 @@
            .
 
       *===============================================================*
-      *                        / READ FILE INFO / 
+      *                        / READ FILE INFO /
 
        READ-COMMUNES.
 
@@ -311,7 +313,7 @@
                    NOT INVALID KEY
                            CONTINUE
                    END-READ
-                   
+
            END-READ
        .
 
@@ -321,7 +323,7 @@
            MOVE P-Numero-Fiscal TO O-Numero-Fiscal
 
            READ F-OCCURRENCES KEY IS O-Numero-Fiscal
-               
+
                INVALID KEY
       *            Il n'existe aucun occurence pour numero-fiscal
                    PERFORM WRITE-ANOMALIES-OCCURENCE
@@ -343,26 +345,29 @@
 
                END-PERFORM
 
+               PERFORM Calcul-IR
+               MOVE I-Imposition TO E-Imposition
+
+               IF ANOMALIES-FOUND-FALSE THEN
       *        Ecriture sur le fichier
-               IF I-Impot < 1000 THEN
+                      IF I-Impot < 1000 THEN
       *            Exoneres.dat
-                   WRITE C-EXO-ENREG
-                   END-WRITE
-               ELSE
-      *        imposables.dat
-                   WRITE C-IMP-ENREG
-                   END-WRITE
+                          WRITE C-EXO-ENREG
+                          END-WRITE
+                      ELSE
+      *            imposables.dat
+                          WRITE C-IMP-ENREG
+                          END-WRITE
+                      END-IF
                END-IF
 
            END-READ
            .
 
       *===============================================================*
-      *                        / CALCUL OCCURENCES / 
+      *                        / CALCUL OCCURENCES /
 
        CALCUL-OCCURENCES.
-
-           MOVE O-Revenu TO Revenu
 
            MOVE P-Identite TO I-Identite
            MOVE P-Identite TO E-Identite
@@ -376,23 +381,28 @@
                WHEN O-Taxe-densite
                    PERFORM Calcul-TH
                WHEN O-Taxe-revenu
-                   PERFORM Calcul-IR
+                   ADD O-Revenu TO Revenu
                WHEN OTHER
                    PERFORM WRITE-ANOMALIES-TYPE
            END-EVALUATE
+
+           MOVE I-Imposition TO E-Imposition
+
+           ADD 1 TO E-Occurrences
+           ADD 1 TO I-Occurrences
            .
 
       *===============================================================*
       *                        / WRITE ANOMALIES /
-      
+
 
        WRITE-ANOMALIES-COMMUNE.
 
            MOVE 1 TO ANOMALIES-FOUND
            INITIALIZE A-Identite A-Lieu A-Occurrence A-Erreur
            MOVE P-Identite TO A-Identite
-           
-           STRING "communes introuvable " P-Code-Insee  
+
+           STRING "communes introuvable " P-Code-Insee
                INTO A-Erreur.
 
            WRITE C-ANO-ENREG
@@ -406,9 +416,9 @@
            MOVE P-Identite TO A-Identite
            MOVE C-Lieu TO A-Lieu
 
-           STRING "departement introuvable " C-Departement  
+           STRING "departement introuvable " C-Departement
                INTO A-Erreur.
-               
+
            WRITE C-ANO-ENREG
            END-WRITE
            .
@@ -420,7 +430,7 @@
            MOVE P-Identite TO A-Identite
            MOVE C-Lieu TO A-Lieu
 
-           STRING "departement introuvable " C-Region
+           STRING "region introuvable " C-Region
                INTO A-Erreur.
 
            WRITE C-ANO-ENREG
@@ -439,7 +449,7 @@
            WRITE C-ANO-ENREG
            END-WRITE
            .
-           
+
 
        WRITE-ANOMALIES-TYPE.
 
@@ -449,7 +459,7 @@
            MOVE C-Lieu TO A-Lieu
            MOVE O-Occurrence TO A-Occurrence
 
-           STRING "occurence de type " O-Taxe  
+           STRING "occurence de type " O-Taxe
                INTO A-Erreur.
 
            WRITE C-ANO-ENREG
@@ -466,6 +476,7 @@
                DISPLAY "Dépassement sur Revenu (Calcul-IR)"
                STOP RUN
            END-DIVIDE
+
       *    Tranche
            IF  quotient >  156244
                COMPUTE  taxe =
@@ -523,6 +534,7 @@
                    DISPLAY "Dépassement sur taxe-Region (Calcul-IR)"
                    STOP RUN
            END-COMPUTE
+
 
            IF debug-full THEN
                DISPLAY "IR Revenu=" Revenu ", Parts=" P-Parts

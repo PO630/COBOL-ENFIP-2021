@@ -1,0 +1,18 @@
+Liste des anomalies :
++--------+--------------------+------------------------------+------+----------+-------------------------------+
+|Contrib.|Nom Prenom          |Lieu                          |Taxe  |Revenu    |Erreur                         |
++--------+--------------------+------------------------------+------+----------+-------------------------------+
+|09903284|Thomas, Aurelie     |                              |      |      0.00|communes introuvable 00236     |
+|16871319|Weber, Daniel       |BONNEVAUX, HAUTE-SAVOIE, RHONE|      |      0.00|aucun occurence trouvee        |
+|31651442|Poirier, Yannis     |SERRE-LES-MOULIERES, JURA, FRA|      |      0.00|aucun occurence trouvee        |
+|33103345|Germain, Patricia   |SAINT-MONTAN, ARDECHE, RHONE-A|IS    | 23 592.00|occurence de type IS           |
+|39449014|Lamy, Josiane       |LABASTIDE-MURAT, LOT, MIDI-PYR|      |      0.00|aucun occurence trouvee        |
+|42361247|Muller, Josiane     |USSEL-D'ALLIER, ALLIER, AUVERG|      |      0.00|aucun occurence trouvee        |
+|51867904|Blanchard, Philippe |                              |      |      0.00|communes introuvable 37644     |
+|52533879|Masson, Hugo        |AUBEVOYE, EURE, HAUTE-NORMANDI|TR    | 21 008.00|occurence de type TR           |
+|86697369|Lemoine, Christian  |SCHIRRHEIN, BAS-RHIN, ALSACE  |      |      0.00|aucun occurence trouvee        |
+|96334222|Dubois, Jean-Luc    |LE MANOIR, EURE, HAUTE-NORMAND|      |      0.00|aucun occurence trouvee        |
+|96484912|Bailly, Daniel      |LA BERNARDIERE, VENDEE, PAYS  |      |      0.00|aucun occurence trouvee        |
+|97041477|Le Roux, Brigitte   |                              |      |      0.00|communes introuvable 15725     |
++--------+--------------------+------------------------------+------+----------+-------------------------------+
+Nombre          :          12

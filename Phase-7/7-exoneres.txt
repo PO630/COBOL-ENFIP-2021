@@ -1,0 +1,16 @@
+Liste des exoneres :
++--------+--------------------+------------------------------+------------+------------+------------+------------+------+
+|Contrib.|Nom Prenom          |Lieu                          |Total       |Commune     |Dept.       |Region      |Occs  |
++--------+--------------------+------------------------------+------------+------------+------------+------------+------+
+|09944624|Bouvier, Jacques    |SERMANGE, JURA, FRANCHE-COMTE |        0.00|        0.00|        0.00|        0.00|     0|
+|44251337|Riviere, Michele    |ALLEMANT, MARNE, CHAMPAGNE-ARD|        0.00|        0.00|        0.00|        0.00|     0|
+|44420783|Meunier, Daniel     |BEHENCOURT, SOMME, PICARDIE   |        0.00|        0.00|        0.00|        0.00|     0|
+|59079620|Julien, Marie       |PARVILLERS-LE-QUESNOY, SOMME, |        0.00|        0.00|        0.00|        0.00|     0|
+|64690071|Le Goff, Nadine     |SOMBERNON, COTE-D'OR, BOURGOGN|        0.00|        0.00|        0.00|        0.00|     0|
+|78046790|Martin, Anais       |CREIL, OISE, PICARDIE         |        0.00|        0.00|        0.00|        0.00|     0|
++--------+--------------------+------------------------------+------------+------------+------------+------------+------+
+Nombre          :           6
+Total           :           0.00
+Communes        :           0.00
+Departements    :           0.00
+Regions         :           0.00
